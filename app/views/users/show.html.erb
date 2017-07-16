@@ -1,0 +1,21 @@
+<div class="container top">
+  <div class="text-uppercase">
+    <p>
+      <strong>Ім'я:</strong>
+      <%= @user.first_name %>
+    </p>
+
+    <p>
+      <strong>Прізвище:</strong>
+      <%= @user.last_name %>
+    </p>
+
+    <p>
+      <strong>Дата нордження:</strong>
+      <%= @user.birth_date.strftime("%d.%m.%Y") if @user.birth_date %>
+    </p>
+  </div>
+
+  <span><%= link_to 'Назад', root_path, { class: "btn btn-primary" } %></span>
+  <span><%= link_to 'Редагувати', edit_user_path(@user), { class: "btn btn-primary" } %></span>
+</div>

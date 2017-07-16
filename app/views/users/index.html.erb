@@ -1,0 +1,24 @@
+<div class="container">
+  <h1 class="text-center">Користувачі</h1>
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Ім'я</th>
+      <th>Прізвище</th>
+      <th>Дата народження</th>
+      <th colspan="3"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @users.each do |user| %>
+        <tr>
+          <td><%= user.first_name %></td>
+          <td><%= user.last_name %></td>
+          <td><%= user.birth_date.strftime("%d.%m.%Y") if user.birth_date%></td>
+          <td><%= link_to 'Детальніше', user %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
