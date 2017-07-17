@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    render :show unless current_user && @user.id == current_user.id
   end
 
   def update

@@ -9,6 +9,16 @@
   </head>
 
   <body>
+  <div class="auth">
+    <% if user_signed_in? %>
+        <div class="greeting">
+          <%= link_to "Привіт, #{current_user.first_name}", user_path(current_user) %>
+        </div>
+        <%= link_to 'Вийти', destroy_user_session_path, { class: "btn btn-primary", method: :delete } %>
+    <% else %>
+        <%= link_to 'Увійти', new_user_session_path, { class: "btn btn-primary" } %>
+    <% end %>
+  </div>
     <%= yield %>
   </body>
 </html>
