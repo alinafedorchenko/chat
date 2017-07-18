@@ -27,3 +27,4 @@ en:
           attributes:
              sender_id:
               sender_eq_recipient: 'You cannot send message yourself'
+              recipient_blocked: 'You cannot send message blocked user'

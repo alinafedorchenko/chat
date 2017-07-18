@@ -16,6 +16,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'rails_admin', '~> 1.2'
 gem 'devise'
+gem 'database_cleaner'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

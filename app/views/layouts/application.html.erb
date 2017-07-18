@@ -10,6 +10,7 @@
 
   <body>
   <div class="auth">
+    <%= link_to 'Головна', root_path, { class: "btn btn-primary" } %>
     <% if user_signed_in? %>
         <div class="greeting">
           <%= link_to "Привіт, #{current_user.first_name}", user_path(current_user) %>

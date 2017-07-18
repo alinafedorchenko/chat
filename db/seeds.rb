@@ -5,3 +5,20 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+DatabaseCleaner.strategy = :truncation, { except: %w(public.schema_migrations) }
+DatabaseCleaner.clean
+
+[{first_name: 'Кенні', last_name: 'Маккормік', blocked: true},
+         {first_name: 'Кайл', last_name: 'Брофловски'},
+         {first_name: 'Баттерс', last_name: 'Стотч'}].each_with_index do |user, i|
+  User.create(user.merge(email: "user#{i}@example.com", password: 'password', birth_date: Date.today - rand(5..30).years))
+
+  10.times do |i|
+    recipient_id = User.pluck(:id).sample
+    sender_id = User.pluck(:id).sample
+
+    unless (sender_id == recipient_id)
+      Message.create(topic: "Прів #{i}", content: "Шо ти як ти #{i}", sender_id: sender_id, recipient_id: recipient_id)
+    end
+  end
+end

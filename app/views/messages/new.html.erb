@@ -1,0 +1,30 @@
+<div class="container">
+  <h3 class="text-center">Нове повідомлення</h3>
+
+  <% if @user.blocked %>
+      <div class="alert alert-warning">
+        <strong>Увага!</strong> Ви не зможете написати цьому юзеру, тому що він заблокований
+      </div>
+  <% end %>
+  <div class="container top">
+    <%= form_for(@message, url: user_messages_path) do |f| %>
+
+        <div class="form-group">
+          <label>Тема</label>
+          <div>
+            <%= f.text_field :topic, {class: 'form-control', required: true} %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Повідомлення</label>
+          <div>
+            <%= f.text_area :content, {class: 'form-control', required: true} %>
+          </div>
+        </div>
+
+        <span><%= link_to 'Назад', root_path, { class: "btn btn-primary" } %></span>
+        <button type="submit" class="btn btn-primary">Відправити</button>
+  <% end %>
+  </div>
+</div>

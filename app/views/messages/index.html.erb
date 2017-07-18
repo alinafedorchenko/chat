@@ -1,0 +1,36 @@
+<div class="container">
+  <h1 class="text-center">Повідомлення користувачу <%= @user.name %></h1>
+
+  <% if @user.blocked %>
+      <div class="alert alert-warning">
+        <strong>Увага!</strong> Ви не зможете написати цьому юзеру, тому що він заблокований
+      </div>
+  <% end %>
+  <% if @messages.present? %>
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th>Тема</th>
+          <th>Повідомлення</th>
+          <th>Дата відправлення</th>
+          <th>Відправник</th>
+          <th colspan="4"></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @messages.each do |message| %>
+            <tr>
+              <td><%= message.topic %></td>
+              <td><%= message.content %></td>
+              <td><%= message.created_at.strftime("%d.%m.%Y")%></td>
+              <td><%= link_to "#{message.sender.name}", user_path(message.sender) %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+  <% end %>
+
+  <%= link_to 'Назад', user_path(@user), { class: "btn btn-primary" } %>
+  <%= link_to 'Нове повідомлення', new_user_message_path, { class: "btn btn-primary" } %>
+</div>
