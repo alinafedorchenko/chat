@@ -10,14 +10,17 @@
 
   <body>
   <div class="auth">
-    <%= link_to 'Головна', root_path, { class: "btn btn-primary" } %>
+    <span><%= link_to 'Головна', root_path, { class: "btn btn-primary main" } %></span>
     <% if user_signed_in? %>
         <div class="greeting">
-          <%= link_to "Привіт, #{current_user.first_name}", user_path(current_user) %>
+          <span><%= link_to "Привіт, #{current_user.first_name}", user_path(current_user) %></span>
+          <% if current_user.messages_count > 0 %>
+              <p>Нових повідомлень: <%= link_to "#{current_user.messages_count}", not_read_messages_path %></p>
+          <% end %>
         </div>
-        <%= link_to 'Вийти', destroy_user_session_path, { class: "btn btn-primary", method: :delete } %>
+        <span><%= link_to 'Вийти', destroy_user_session_path, { class: "btn btn-primary", method: :delete } %></span>
     <% else %>
-        <%= link_to 'Увійти', new_user_session_path, { class: "btn btn-primary" } %>
+        <span><%= link_to 'Увійти', new_user_session_path, { class: "btn btn-primary" } %></span>
     <% end %>
   </div>
     <%= yield %>

@@ -8,6 +8,8 @@
 #  first_name             :string
 #  last_name              :string
 #  birth_date             :datetime
+#  messages_read_at       :datetime
+#  blocked                :boolean          default(FALSE)
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
@@ -26,10 +28,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :rememberable, :trackable, :validatable
 
-  validates_presence_of :first_name, :last_name
-
   has_many :sent_messages, class_name: 'Message', foreign_key: :sender_id, inverse_of: :sender
   has_many :received_messages, class_name: 'Message', foreign_key: :recipient_id, inverse_of: :recipient
+
+  validates_presence_of :first_name, :last_name
+
+  def messages_count
+    received_messages.not_read.count
+  end
 
   def name
     "#{first_name} #{last_name}"

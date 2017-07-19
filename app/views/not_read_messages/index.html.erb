@@ -1,19 +1,14 @@
 <div class="container">
-  <h1 class="text-center">Повідомлення користувачу <%= @user.name %></h1>
 
-  <% if @user.blocked %>
-      <div class="alert alert-warning">
-        <strong>Увага!</strong> Ви не зможете написати цьому юзеру, тому що він заблокований
-      </div>
-  <% end %>
-  <% if @messages.present? %>
+  <h1 class="text-center">Нові повідомлення</h1>
+   <% if @messages.present? %>
       <table class="table table-hover">
         <thead>
         <tr>
           <th>Тема</th>
           <th>Повідомлення</th>
           <th>Дата відправлення</th>
-          <th>Відправник</th>
+          <th>Перейти до листування</th>
           <th colspan="4"></th>
         </tr>
         </thead>
@@ -24,12 +19,10 @@
               <td><%= message.topic %></td>
               <td><%= message.content %></td>
               <td><%= message.created_at.strftime("%d.%m.%Y")%></td>
-              <td><%= link_to "#{message.sender.name}", user_path(message.sender) %></td>
+              <td><%= link_to "#{message.sender.name}", user_messages_path(message.sender) %></td>
             </tr>
         <% end %>
         </tbody>
       </table>
   <% end %>
-
-  <%= link_to 'Нове повідомлення', new_user_message_path, { class: "btn btn-primary" } %>
 </div>

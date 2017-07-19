@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :edit, :update] do
     resources :messages
   end
+  resources :not_read_messages, only: :index
 end

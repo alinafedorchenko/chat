@@ -17,7 +17,6 @@
     </p>
   </div>
 
-  <span><%= link_to 'Назад', root_path, { class: "btn btn-primary" } %></span>
   <% if current_user && @user.id == current_user.id %>
       <span><%= link_to 'Редагувати', edit_user_path(@user), { class: "btn btn-primary" } %></span>
   <% elsif user_signed_in? %>

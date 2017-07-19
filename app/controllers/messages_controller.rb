@@ -3,6 +3,7 @@ class MessagesController < ApplicationController
 
   def index
     @messages = Message.current_dialog_messages(params[:user_id], current_user.try(:id))
+    @messages.where(recipient_id: current_user.try(:id)).update(read: true)
   end
 
   def new
@@ -15,11 +16,9 @@ class MessagesController < ApplicationController
     @message.recipient_id = params[:user_id]
     respond_to do |format|
       if @message.save
-        format.html { redirect_to user_messages_path, notice: 'Message was successfully created.' }
-        format.json { render :index, status: :created, location: @message }
+        format.html { redirect_to user_messages_path }
       else
         format.html { render :new }
-        format.json { render json: @message.errors, status: :unprocessable_entity }
       end
     end
   end

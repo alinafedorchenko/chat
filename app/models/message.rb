@@ -16,6 +16,7 @@ class Message < ApplicationRecord
 
   default_scope { order('messages.created_at DESC') }
   scope :current_dialog_messages, -> (sender_id, recipient_id) { where('sender_id = :sender_id AND recipient_id = :recipient_id OR sender_id = :recipient_id AND recipient_id = :sender_id', sender_id: sender_id, recipient_id: recipient_id) }
+  scope :not_read, -> { where('messages.read = false')}
 
   validates_presence_of :topic, :content
   validate :sender_eq_recipient
